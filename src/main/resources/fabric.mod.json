@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "tg_mine",
+  "version": "${version}",
+
+  "name": "telegram-minecraft",
+  "description": "Telegram chat in minecraft",
+  "authors": [
+    "@kibersportovich"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/tg_mine/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "org.sgx.tg_mine.minecraft.Tg_mine"
+    ],
+    "client": []
+  },
+  "mixins": [],
+
+  "depends": {
+    "fabricloader": ">=0.14.17",
+    "fabric-api": "*",
+    "minecraft": "~1.19.4",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
