@@ -4,6 +4,7 @@ import org.sgx.tg_mine.minecraft.commands.AuthCommand;
 import org.sgx.tg_mine.minecraft.commands.DelTg;
 import org.sgx.tg_mine.minecraft.commands.SetBot;
 import org.sgx.tg_mine.minecraft.commands.SetChat;
+import org.sgx.tg_mine.minecraft.commands.SetReg;
 import org.sgx.tg_mine.minecraft.telegram.Telegram_bot_pengrad;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +39,7 @@ public class Tg_mine implements ModInitializer{
 		CommandRegistrationCallback.EVENT.register(DelTg::register);
 		CommandRegistrationCallback.EVENT.register(SetBot::register);
 		CommandRegistrationCallback.EVENT.register(SetChat::register);
+		CommandRegistrationCallback.EVENT.register(SetReg::register);
 	}
 
 }

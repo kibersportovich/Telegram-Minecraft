@@ -21,10 +21,10 @@ public class Database {
     {
         statmt = conn.createStatement();
         statmt.execute("CREATE TABLE if not exists 'server_users' ('chat_id' INTEGER, 'username' TEXT);");
-        statmt.execute("CREATE TABLE if not exists 'bot_settings' ('num' INTEGER, 'token' TEXT, 'chat' INTEGER);");
+        statmt.execute("CREATE TABLE if not exists 'bot_settings' ('num' INTEGER, 'token' TEXT, 'chat' INTEGER, 'reg' String);");
         resSet = statmt.executeQuery("SELECT * FROM bot_settings");
         if (!resSet.next()){
-            statmt.execute("INSERT INTO bot_settings(num) VALUES(1);");
+            statmt.execute("INSERT INTO bot_settings(num, reg) VALUES(1, 'false');");
         }
     }
 
@@ -49,14 +49,20 @@ public class Database {
         statmt.execute(String.format("UPDATE bot_settings SET chat='%d' WHERE num=1", chat));
     }
 
+    public static void change_reg(String value) throws SQLException
+    {
+        statmt = conn.createStatement();
+        statmt.execute(String.format("UPDATE bot_settings SET reg='%s' WHERE num=1", value));
+    }
+
     public static void readUsers() throws SQLException
     {
         resSet = statmt.executeQuery("SELECT * FROM server_users");
         while(resSet.next())
         {
-            String username = resSet.getString("username");
             Long chat_id = resSet.getLong("chat_id");
-            Utils.id_nickname.put(username, chat_id);
+            String username = resSet.getString("username");
+            Utils.id_nickname.put(chat_id, username);
         }
     }
 
@@ -66,8 +72,10 @@ public class Database {
         resSet.next();
         String token = resSet.getString("token");
         long chat = resSet.getLong("chat");
+        boolean reg = resSet.getBoolean("reg");
         Telegram_bot_pengrad.bot = new TelegramBot(token);
         Telegram_bot_pengrad.chatId = chat;
+        Telegram_bot_pengrad.reg = reg;
     }
 
     public static void delete(String nick) throws SQLException{

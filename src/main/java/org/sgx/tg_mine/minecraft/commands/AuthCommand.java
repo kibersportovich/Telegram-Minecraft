@@ -30,12 +30,11 @@ public class AuthCommand {
 
         ServerCommandSource source = context.getSource();
         String nick = source.getName();
-        String code = getString(context, "code");
-        if (Utils.codes.contains(code)) {
-            Long id = Utils.id_nickname.get(code);
-            Utils.id_nickname.put(nick, id);
-            Utils.id_nickname.remove(code);
+        String code = " " + getString(context, "code");
+        if (Utils.codes.contains(code) && Utils.id_nickname.containsValue(code)) {
+            Long id = Utils.get_id(code);
             Utils.codes.remove(code);
+            Utils.id_nickname.replace(id, nick);
             try {
                 Database.writeUsers(id, nick);
             } catch (SQLException e){

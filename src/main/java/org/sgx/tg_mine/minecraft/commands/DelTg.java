@@ -25,8 +25,9 @@ public class DelTg {
 
         ServerCommandSource source = context.getSource();
         String nick = source.getName();
-        if (Utils.id_nickname.containsKey(nick)){
-            Utils.id_nickname.remove(nick);
+        if (Utils.id_nickname.containsValue(nick)){
+            Long id = Utils.get_id(nick);
+            Utils.id_nickname.remove(id);
             try {
             Database.delete(nick);
             } catch (SQLException e){

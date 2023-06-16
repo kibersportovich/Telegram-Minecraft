@@ -1,4 +1,5 @@
 package org.sgx.tg_mine.minecraft.telegram;
+import com.mojang.datafixers.kinds.IdF;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
@@ -13,10 +14,13 @@ import java.io.IOException;
 import java.util.List;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.util.Formatting;
+import net.minecraft.text.MutableText;
 
 public class Telegram_bot_pengrad {
 
     public static MinecraftServer server;
+
+    public static boolean reg;
 
     public static long chatId;
 
@@ -35,19 +39,18 @@ public class Telegram_bot_pengrad {
                 long chat = message.chat().id();
                 long user_id = message.from().id();
                 if (text.charAt(0) != '-' && text.equals("/reg")){
-                    String code = Utils.random();
+                    String code = " " + Utils.random();
                     String text_mess;
-                    if (!(Utils.id_nickname.containsValue(user_id))){
-                        Utils.id_nickname.put(code, chat);
+                    if (Utils.id_nickname.get(user_id) == null){
+                        Utils.id_nickname.put(chat, code);
                         Utils.codes.add(code);
-                        text_mess = "привет, введи код на сервере: " + code;
-                    } else if (Utils.codes.contains(Utils.get_nick(user_id))){
-                        String old_code = Utils.get_nick(user_id);
+                        text_mess = "привет, введи код на сервере:" + code;
+                    } else if (Utils.codes.contains(Utils.id_nickname.get(user_id))){
+                        String old_code = Utils.id_nickname.get(user_id);
+                        Utils.id_nickname.replace(user_id, code);
                         Utils.codes.remove(old_code);
-                        Utils.id_nickname.remove(old_code);
-                        Utils.id_nickname.put(code, user_id);
                         Utils.codes.add(code);
-                        text_mess = "держи новый код: " + code;
+                        text_mess = "держи новый код:" + code;
                     }
                     else {
                         text_mess = "ты уже зарегистрирован";
@@ -56,29 +59,34 @@ public class Telegram_bot_pengrad {
                             .parseMode(ParseMode.HTML)
                             .disableWebPagePreview(true)
                             .disableNotification(true);
-
                     bot.execute(request, new Callback<SendMessage, SendResponse>() {
                         @Override
                         public void onResponse(SendMessage request, SendResponse response) {}
-
                         @Override
                         public void onFailure(SendMessage request, IOException e) {}
                     });
                     return UpdatesListener.CONFIRMED_UPDATES_ALL;
                 }
-
                 if (chatId == chat) {
-                    if (!(Utils.id_nickname.containsValue(user_id))) {
-                        return UpdatesListener.CONFIRMED_UPDATES_ALL;
-                    }
-                    String nick = Utils.get_nick(user_id);
-                    if (Utils.codes.contains(nick)) {
-                        return UpdatesListener.CONFIRMED_UPDATES_ALL;
-                    }
-                    String str_mess = nick + "(from_tg): " + text;
-                    Text text_mess = Text.literal(str_mess).formatted(Formatting.AQUA);
                     PlayerManager pm = server.getPlayerManager();
-                    pm.broadcast(text_mess, false);
+                    String nick = Utils.id_nickname.get(user_id);
+                    String str_mess = "(from_tg): " + text;
+                    MutableText text_mess = Text.literal(str_mess).formatted(Formatting.AQUA);
+                    if (!(nick == null || Utils.codes.contains(nick)))
+                    {
+                        MutableText green_nick = Text.literal(nick).formatted(Formatting.GREEN);
+                        MutableText final_text = green_nick.append(text_mess);
+                        pm.broadcast(final_text, false);
+                        return UpdatesListener.CONFIRMED_UPDATES_ALL;
+                    }
+                    if (!reg)
+                    {
+                        String tg_nick = Utils.tg_nick(message.from());
+                        MutableText dark_blue_nick = Text.literal(tg_nick).formatted(Formatting.BLUE);
+                        MutableText final_text = dark_blue_nick.append(text_mess);
+                        pm.broadcast(final_text, false);
+                        return UpdatesListener.CONFIRMED_UPDATES_ALL;
+                    }
                 }
                 return UpdatesListener.CONFIRMED_UPDATES_ALL;
             }

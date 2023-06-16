@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.LinkedList;
 import java.util.Set;
+import com.pengrad.telegrambot.model.User;
 
 public class Utils {
 
-
-    public static HashMap<String, Long> id_nickname = new HashMap<>();
+    public static HashMap<Long, String> id_nickname = new HashMap<>();
 
     public static LinkedList<String> codes = new LinkedList<>();
 
@@ -29,16 +29,29 @@ public class Utils {
         return false;
     }
 
-    public static String get_nick(long id) {
-        Set<String> nicknames = id_nickname.keySet();
-        for (String nick : nicknames) {
-            Long id_from_map = id_nickname.get(nick);
-            if (id_from_map.equals(id)) {return nick;}
+    public static Long get_id(String code){
+        Set<Long> ids = id_nickname.keySet();
+        for (long id: ids){
+            String value = id_nickname.get(id);
+            if (code.equals(value)) {return id;}
         }
         return null;
     }
 
-}
+    public static String tg_nick(User user){
+        StringBuilder tg_nick = new StringBuilder();
+        if (user.firstName() != null) {
+            tg_nick.append(user.firstName());
+            if (user.lastName() != null){
+                String lastname = " " + user.lastName();
+                tg_nick.append(lastname);
+            }
+        }
+        return tg_nick.toString();
+    }
+    }
+
+
 
 
 
