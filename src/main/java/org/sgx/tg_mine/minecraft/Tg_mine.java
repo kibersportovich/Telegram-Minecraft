@@ -23,7 +23,8 @@ public class Tg_mine implements ModInitializer{
 	public void onInitialize() {
 		ServerLifecycleEvents.SERVER_STARTED.register(
 				server -> {
-					Telegram_bot_pengrad.server = server;
+					Telegram_bot_pengrad.pm = server.getPlayerManager();
+					Telegram_bot_pengrad.start_bot();
 				});
 		try {
 			Database.conn();
@@ -33,8 +34,6 @@ public class Tg_mine implements ModInitializer{
 		} catch (SQLException | ClassNotFoundException e){
 			e.printStackTrace();
 		}
-		Telegram_bot_pengrad.start_bot();
-
 		CommandRegistrationCallback.EVENT.register(AuthCommand::register);
 		CommandRegistrationCallback.EVENT.register(DelTg::register);
 		CommandRegistrationCallback.EVENT.register(SetBot::register);

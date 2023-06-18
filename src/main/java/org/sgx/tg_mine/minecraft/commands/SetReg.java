@@ -9,6 +9,7 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.sgx.tg_mine.minecraft.telegram.Database;
+import org.sgx.tg_mine.minecraft.telegram.Telegram_bot_pengrad;
 
 import java.sql.SQLException;
 
@@ -40,11 +41,13 @@ public class SetReg {
             switch (value) {
                 case "on" ->
                 {
+                    Telegram_bot_pengrad.reg = true;
                     source.sendMessage(on);
                     Database.change_reg("true");
                 }
                 case "off" ->
                 {
+                    Telegram_bot_pengrad.reg = false;
                     source.sendMessage(off);
                     Database.change_reg("false");
                 }

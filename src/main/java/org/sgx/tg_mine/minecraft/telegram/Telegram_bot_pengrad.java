@@ -18,7 +18,7 @@ import net.minecraft.text.MutableText;
 
 public class Telegram_bot_pengrad {
 
-    public static MinecraftServer server;
+    public static PlayerManager pm;
 
     public static boolean reg;
 
@@ -68,7 +68,6 @@ public class Telegram_bot_pengrad {
                     return UpdatesListener.CONFIRMED_UPDATES_ALL;
                 }
                 if (chatId == chat) {
-                    PlayerManager pm = server.getPlayerManager();
                     String nick = Utils.id_nickname.get(user_id);
                     String str_mess = "(from_tg): " + text;
                     MutableText text_mess = Text.literal(str_mess).formatted(Formatting.AQUA);

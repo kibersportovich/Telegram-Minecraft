@@ -40,12 +40,10 @@ public class Utils {
 
     public static String tg_nick(User user){
         StringBuilder tg_nick = new StringBuilder();
-        if (user.firstName() != null) {
-            tg_nick.append(user.firstName());
-            if (user.lastName() != null){
-                String lastname = " " + user.lastName();
-                tg_nick.append(lastname);
-            }
+        tg_nick.append(user.firstName());
+        if (user.lastName() != null){
+            String lastname = " " + user.lastName();
+            tg_nick.append(lastname);
         }
         return tg_nick.toString();
     }
