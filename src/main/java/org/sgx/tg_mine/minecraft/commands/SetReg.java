@@ -10,6 +10,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.sgx.tg_mine.minecraft.telegram.Database;
 import org.sgx.tg_mine.minecraft.telegram.Telegram_bot_pengrad;
+import org.sgx.tg_mine.minecraft.telegram.Utils;
 
 import java.sql.SQLException;
 
@@ -28,10 +29,17 @@ public class SetReg {
     public static int run(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         Text error_args = Text.literal("аргументами могут быть только \"on\" или \"off\" ").formatted(Formatting.RED);
         Text error_db = Text.literal("ошибка базы данных").formatted(Formatting.RED);
+        Text error_privileges = Text.literal("у вас недостаточно прав").formatted(Formatting.RED);
         Text on = Text.literal("привязка ника теперь обязательна").formatted(Formatting.GREEN);
         Text off = Text.literal("привязка ника теперь необязательна").formatted(Formatting.GREEN);
 
         ServerCommandSource source = context.getSource();
+        String nick = source.getName();
+        String[] admins = source.getServer().getPlayerManager().getOpNames();
+        if (!Utils.contains(admins, nick)){
+            source.sendMessage(error_privileges);
+            return 1;
+        }
         String value = getString(context, "on/off");
         if (!(value.equals("on") || value.equals("off"))){
             source.sendMessage(error_args);
