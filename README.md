@@ -10,8 +10,8 @@ ___
 4. next, you must configure the bot in minecraft, to do this, enter the command /SetBot "your_bot_token" (you must have operator rights)
 5. specify your chat in minecraft, to do this, enter the command /SetChat "your_telegram_chat_id" (you must have operator rights)
 ___
-# Usage
-you need to link your telegram profile to your nickname in minecraft: in your bot type /reg
+# Registration
+you can link your telegram profile to your nickname in minecraft: in your bot type /reg
 <p>enter the resulting code in minecraft: /reg your_code</p>
 
 # all commands
@@ -19,4 +19,5 @@ you need to link your telegram profile to your nickname in minecraft: in your bo
 * */SetBot* _"your_bot_token"_ - Set bot token
 * */SetChat* _"your_telegram_chat_id"_ - Set telegram chat
 * */reg* _"code"_ - To link your telegram profile and minecraft nickname
-*  */del_tg* - To unlink your telegram profile
+* */del_tg* - To unlink your telegram profile
+* */SetReg* _"on/off"_ - required/non-required [registration](#registration)
