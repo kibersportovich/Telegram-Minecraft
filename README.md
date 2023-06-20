@@ -13,7 +13,10 @@ ___
 # Registration
 you can link your telegram profile to your nickname in minecraft: in your bot type /reg
 <p>enter the resulting code in minecraft: /reg your_code</p>
+ 
+_your nick color without registrations_ - ![#5555FF](https://placehold.co/15x15/5555FF/5555FF.png) 
 
+_with registration_ - ![#55FF55](https://placehold.co/15x15/55FF55/55FF55.png)
 # all commands
 
 * */SetBot* _"your_bot_token"_ - Set bot token
