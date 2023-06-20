@@ -27,9 +27,9 @@ public class SetBot {
     }
 
     public static int run(CommandContext<ServerCommandSource> context) {
-        Text error_privileges = Text.literal("у вас недостаточно прав").formatted(Formatting.RED);
-        Text error_db = Text.literal("ошибка базы данных").formatted(Formatting.RED);
-        Text success = Text.literal("бот перезапущен с новой конфигурацией").formatted(Formatting.GREEN);
+        Text error_privileges = Text.literal("you are not an operator").formatted(Formatting.RED);
+        Text error_db = Text.literal("database error").formatted(Formatting.RED);
+        Text success = Text.literal("bot restarted with the new configuration").formatted(Formatting.GREEN);
 
         ServerCommandSource source = context.getSource();
         String nick = source.getName();

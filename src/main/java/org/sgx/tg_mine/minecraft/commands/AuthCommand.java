@@ -24,9 +24,9 @@ public class AuthCommand {
     }
 
     public static int run(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
-        Text error_db = Text.literal("ошибка базы данных").formatted(Formatting.RED);
-        Text error_code = Text.literal("вы ввели неверный код").formatted(Formatting.RED);
-        Text success = Text.literal("ваш ник успешно привязан к id вашего tg аккаунта").formatted(Formatting.GREEN);
+        Text error_db = Text.literal("database error").formatted(Formatting.RED);
+        Text error_code = Text.literal("You entered the wrong code").formatted(Formatting.RED);
+        Text success = Text.literal("your nickname is successfully linked to the id of your tg account").formatted(Formatting.GREEN);
 
         ServerCommandSource source = context.getSource();
         String nick = source.getName();

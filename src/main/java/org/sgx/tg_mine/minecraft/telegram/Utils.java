@@ -1,10 +1,6 @@
 package org.sgx.tg_mine.minecraft.telegram;
 
-
-import java.util.HashMap;
-import java.util.Random;
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.*;
 import com.pengrad.telegrambot.model.User;
 
 public class Utils {

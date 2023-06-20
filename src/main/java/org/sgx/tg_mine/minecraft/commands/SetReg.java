@@ -27,11 +27,11 @@ public class SetReg {
     }
 
     public static int run(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
-        Text error_args = Text.literal("аргументами могут быть только \"on\" или \"off\" ").formatted(Formatting.RED);
-        Text error_db = Text.literal("ошибка базы данных").formatted(Formatting.RED);
-        Text error_privileges = Text.literal("у вас недостаточно прав").formatted(Formatting.RED);
-        Text on = Text.literal("привязка ника теперь обязательна").formatted(Formatting.GREEN);
-        Text off = Text.literal("привязка ника теперь необязательна").formatted(Formatting.GREEN);
+        Text error_args = Text.literal("the arguments can only be \"on\" or \"off\" ").formatted(Formatting.RED);
+        Text error_db = Text.literal("database error").formatted(Formatting.RED);
+        Text error_privileges = Text.literal("you are not an operator").formatted(Formatting.RED);
+        Text on = Text.literal("Linking the nickname is required").formatted(Formatting.GREEN);
+        Text off = Text.literal("Linking the nickname is non-required").formatted(Formatting.GREEN);
 
         ServerCommandSource source = context.getSource();
         String nick = source.getName();

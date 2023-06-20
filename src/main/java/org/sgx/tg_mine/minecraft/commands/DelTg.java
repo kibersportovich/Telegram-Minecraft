@@ -19,9 +19,9 @@ public class DelTg {
     }
 
     public static int run(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
-        Text error_db = Text.literal("ошибка базы данных").formatted(Formatting.RED);
-        Text error_acc = Text.literal("вы не зарегистрировали аккаунт").formatted(Formatting.RED);
-        Text success = Text.literal("ваши аккаунты телеграм и майнкрафт больше не связаны").formatted(Formatting.GREEN);
+        Text error_db = Text.literal("database error").formatted(Formatting.RED);
+        Text error_acc = Text.literal("you did not register an account").formatted(Formatting.RED);
+        Text success = Text.literal("your telegram and minecraft accounts are no longer linked").formatted(Formatting.GREEN);
 
         ServerCommandSource source = context.getSource();
         String nick = source.getName();

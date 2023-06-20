@@ -26,10 +26,10 @@ public class SetChat {
     }
 
     public static int run(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
-        Text error_privileges = Text.literal("у вас недостаточно прав").formatted(Formatting.RED);
-        Text error_chat = Text.literal("ты ввёл неправильный id чата").formatted(Formatting.RED);
-        Text error_db = Text.literal("ошибка базы данных").formatted(Formatting.RED);
-        Text success = Text.literal("чат изменён").formatted(Formatting.GREEN);
+        Text error_privileges = Text.literal("you are not an operator").formatted(Formatting.RED);
+        Text error_chat = Text.literal("You entered the wrong chat id").formatted(Formatting.RED);
+        Text error_db = Text.literal("database error").formatted(Formatting.RED);
+        Text success = Text.literal("chat has been changed").formatted(Formatting.GREEN);
 
         ServerCommandSource source = context.getSource();
         String nick = source.getName();

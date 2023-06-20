@@ -44,16 +44,16 @@ public class Telegram_bot_pengrad {
                     if (Utils.id_nickname.get(user_id) == null){
                         Utils.id_nickname.put(chat, code);
                         Utils.codes.add(code);
-                        text_mess = "привет, введи код на сервере:" + code;
+                        text_mess = "Hi, enter the code on the server:" + code;
                     } else if (Utils.codes.contains(Utils.id_nickname.get(user_id))){
                         String old_code = Utils.id_nickname.get(user_id);
                         Utils.id_nickname.replace(user_id, code);
                         Utils.codes.remove(old_code);
                         Utils.codes.add(code);
-                        text_mess = "держи новый код:" + code;
+                        text_mess = "new code:" + code;
                     }
                     else {
-                        text_mess = "ты уже зарегистрирован";
+                        text_mess = "you are already registered";
                     }
                     SendMessage request = new SendMessage(chat, text_mess)
                             .parseMode(ParseMode.HTML)
