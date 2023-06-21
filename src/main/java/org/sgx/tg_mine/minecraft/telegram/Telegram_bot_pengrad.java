@@ -38,7 +38,7 @@ public class Telegram_bot_pengrad {
                 String text = message.text();
                 long chat = message.chat().id();
                 long user_id = message.from().id();
-                if (text.charAt(0) != '-' && text.equals("/reg")){
+                if (String.valueOf(chat).charAt(0) != '-' && text.equals("/reg")){
                     String code = " " + Utils.random();
                     String text_mess;
                     if (Utils.id_nickname.get(user_id) == null){
