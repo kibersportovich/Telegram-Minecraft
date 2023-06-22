@@ -1,6 +1,7 @@
 package org.sgx.tg_mine.minecraft.mixin;
 
 import com.mojang.authlib.GameProfile;
+import com.pengrad.telegrambot.model.request.ParseMode;
 import com.pengrad.telegrambot.request.SendMessage;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -31,7 +32,7 @@ public abstract class Tg_mine_Mixin extends PlayerEntity {
     private void injected(SentMessage message, boolean filterMaskEnabled, MessageType.Parameters params, CallbackInfo ci) {
         String text = message.getContent().getString();
         String name = this.getName().getString();
-        String final_text = name + ": " + text;
-        Telegram_bot_pengrad.bot.execute(new SendMessage(Telegram_bot_pengrad.chatId, final_text));
+        String final_text = String.format("<i><b>%s:</b></i> %s", name, text);
+        Telegram_bot_pengrad.bot.execute(new SendMessage(Telegram_bot_pengrad.chatId, final_text).parseMode(ParseMode.HTML));
     }
 }
