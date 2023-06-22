@@ -1,18 +1,15 @@
 package org.sgx.tg_mine.minecraft.mixin;
 
 import com.mojang.authlib.GameProfile;
+import com.pengrad.telegrambot.Callback;
 import com.pengrad.telegrambot.model.request.ParseMode;
 import com.pengrad.telegrambot.request.SendMessage;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.damage.DamageSource;
+import com.pengrad.telegrambot.response.BaseResponse;
+import com.pengrad.telegrambot.response.SendResponse;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.message.MessageType;
 import net.minecraft.network.message.SentMessage;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,6 +18,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.sgx.tg_mine.minecraft.telegram.Telegram_bot_pengrad;
 
+import java.io.IOException;
+
 @Mixin(ServerPlayerEntity.class)
 public abstract class Tg_mine_Mixin extends PlayerEntity {
 
@@ -28,11 +27,12 @@ public abstract class Tg_mine_Mixin extends PlayerEntity {
         super(world, pos, yaw, gameProfile);
     }
 
-    @Inject(method = "sendChatMessage", at = @At("HEAD"))
+    @Inject(method = "sendChatMessage", at = @At("TAIL"))
     private void injected(SentMessage message, boolean filterMaskEnabled, MessageType.Parameters params, CallbackInfo ci) {
         String text = message.getContent().getString();
         String name = this.getName().getString();
         String final_text = String.format("<i><b>%s:</b></i> %s", name, text);
-        Telegram_bot_pengrad.bot.execute(new SendMessage(Telegram_bot_pengrad.chatId, final_text).parseMode(ParseMode.HTML));
+        SendMessage request = new SendMessage(Telegram_bot_pengrad.chatId, final_text).parseMode(ParseMode.HTML).disableWebPagePreview(true);
+        Telegram_bot_pengrad.bot.execute(request);
     }
 }

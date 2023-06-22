@@ -1,5 +1,4 @@
 package org.sgx.tg_mine.minecraft.telegram;
-import com.mojang.datafixers.kinds.IdF;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
@@ -8,7 +7,6 @@ import com.pengrad.telegrambot.model.request.ParseMode;
 import com.pengrad.telegrambot.response.SendResponse;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.UpdatesListener;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.text.Text;
 import java.io.IOException;
 import java.util.List;
@@ -38,6 +36,18 @@ public class Telegram_bot_pengrad {
                 String text = message.text();
                 long chat = message.chat().id();
                 long user_id = message.from().id();
+                if (String.valueOf(chat).charAt(0) == '-' && text.equals("/reg")){
+                    SendMessage request = new SendMessage(chat, "send \"/reg\" as private message")
+                            .parseMode(ParseMode.HTML)
+                            .disableWebPagePreview(true);
+                    bot.execute(request, new Callback<SendMessage, SendResponse>() {
+                        @Override
+                        public void onResponse(SendMessage request, SendResponse response) {}
+                        @Override
+                        public void onFailure(SendMessage request, IOException e) {}
+                    });
+                    return UpdatesListener.CONFIRMED_UPDATES_ALL;
+                }
                 if (String.valueOf(chat).charAt(0) != '-' && text.equals("/reg")){
                     String code = " " + Utils.random();
                     String text_mess;
@@ -57,8 +67,7 @@ public class Telegram_bot_pengrad {
                     }
                     SendMessage request = new SendMessage(chat, text_mess)
                             .parseMode(ParseMode.HTML)
-                            .disableWebPagePreview(true)
-                            .disableNotification(true);
+                            .disableWebPagePreview(true);
                     bot.execute(request, new Callback<SendMessage, SendResponse>() {
                         @Override
                         public void onResponse(SendMessage request, SendResponse response) {}
