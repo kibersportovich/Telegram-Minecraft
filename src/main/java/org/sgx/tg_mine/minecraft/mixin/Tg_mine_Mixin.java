@@ -1,0 +1,37 @@
+package org.sgx.tg_mine.minecraft.mixin;
+
+import com.mojang.authlib.GameProfile;
+import com.pengrad.telegrambot.request.SendMessage;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.message.MessageType;
+import net.minecraft.network.message.SentMessage;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.sgx.tg_mine.minecraft.telegram.Telegram_bot_pengrad;
+
+@Mixin(ServerPlayerEntity.class)
+public abstract class Tg_mine_Mixin extends PlayerEntity {
+
+    public Tg_mine_Mixin(World world, BlockPos pos, float yaw, GameProfile gameProfile) {
+        super(world, pos, yaw, gameProfile);
+    }
+
+    @Inject(method = "sendChatMessage", at = @At("HEAD"))
+    private void injected(SentMessage message, boolean filterMaskEnabled, MessageType.Parameters params, CallbackInfo ci) {
+        String text = message.getContent().getString();
+        String name = this.getName().getString();
+        String final_text = name + ": " + text;
+        Telegram_bot_pengrad.bot.execute(new SendMessage(Telegram_bot_pengrad.chatId, final_text));
+    }
+}

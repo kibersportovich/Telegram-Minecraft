@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "org.sgx.tg_mine.minecraft.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "Tg_mine_Mixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

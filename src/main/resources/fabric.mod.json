@@ -10,7 +10,7 @@
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/kibersportovich/Telegram-Minecraft"
   },
 
   "license": "CC0-1.0",
@@ -23,7 +23,7 @@
     ],
     "client": []
   },
-  "mixins": [],
+  "mixins": ["minecraft.mixins.json"],
 
   "depends": {
     "fabricloader": ">=0.14.17",
