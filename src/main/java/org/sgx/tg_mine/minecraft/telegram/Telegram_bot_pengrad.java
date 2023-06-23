@@ -36,19 +36,7 @@ public class Telegram_bot_pengrad {
                 String text = message.text();
                 long chat = message.chat().id();
                 long user_id = message.from().id();
-                if (String.valueOf(chat).charAt(0) == '-' && text.equals("/reg")){
-                    SendMessage request = new SendMessage(chat, "send \"/reg\" as private message")
-                            .parseMode(ParseMode.HTML)
-                            .disableWebPagePreview(true);
-                    bot.execute(request, new Callback<SendMessage, SendResponse>() {
-                        @Override
-                        public void onResponse(SendMessage request, SendResponse response) {}
-                        @Override
-                        public void onFailure(SendMessage request, IOException e) {}
-                    });
-                    return UpdatesListener.CONFIRMED_UPDATES_ALL;
-                }
-                if (String.valueOf(chat).charAt(0) != '-' && text.equals("/reg")){
+                if (text.equals("/reg")){
                     String code = " " + Utils.random();
                     String text_mess;
                     if (Utils.id_nickname.get(user_id) == null){
