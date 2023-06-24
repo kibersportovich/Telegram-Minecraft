@@ -40,7 +40,7 @@ public class Telegram_bot_pengrad {
                     String code = " " + Utils.random();
                     String text_mess;
                     if (Utils.id_nickname.get(user_id) == null){
-                        Utils.id_nickname.put(chat, code);
+                        Utils.id_nickname.put(user_id, code);
                         Utils.codes.add(code);
                         text_mess = "Hi, enter the code on the server:" + code;
                     } else if (Utils.codes.contains(Utils.id_nickname.get(user_id))){
