@@ -1,3 +1,7 @@
+[![FabricAPI](https://img.shields.io/static/v1?label=modloader&message=fabric&color=brightgreen)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
+![Mod Environment](https://img.shields.io/static/v1?label=environment&message=server&color=yellow)
+[![License](https://img.shields.io/static/v1?label=licence&message=GPL-3.0&color=blue)](./LICENSE)
+ 
  # Telegram-Minecraft
 
 _Fabric server mod for communicating with your friends in minecraft via telegram chat_
