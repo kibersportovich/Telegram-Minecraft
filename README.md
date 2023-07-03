@@ -30,3 +30,6 @@ _with registration_ - ![#55FF55](https://placehold.co/15x15/55FF55/55FF55.png)
 * */reg* _"code"_ - To link your telegram profile and minecraft nickname
 * */del_tg* - To unlink your telegram profile
 * */SetReg* _"on/off"_ - required/non-required [registration](#registration)
+
+# Telegram-Minecraft-scripts
+To simplify Telegram-Minecraft mod configuration, you can use [scripts written in python](https://github.com/kibersportovich/Telegram-Minecraft-scripts)
