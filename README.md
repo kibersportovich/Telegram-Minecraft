@@ -14,7 +14,9 @@ ___
 2. Change the bot's privacy settings in Botfather: 1) /setprivacy 2) choose your bot 3) Disable
 3. for step 3, you need add the created bot to the chat with your friends :)
 4. next, you must configure the bot in minecraft, to do this, enter the command /SetBot "your_bot_token" (you must have operator rights)
-5. specify your chat in minecraft, to do this, enter the command /SetChat "your_telegram_chat_id" (you must have operator rights)
+5. specify your chat in minecraft, to do this, enter the command /SetChat your_telegram_chat_id (you must have operator rights)
+   #### Telegram-Minecraft-scripts
+to make it easier to create a bot for Telegram-Minecraft mod or to get a telegram chat id, you can use [scripts written in python](https://github.com/kibersportovich/Telegram-Minecraft-scripts)
 ___
 # Registration
 you can link your telegram profile to your nickname in minecraft: in your bot type /reg
@@ -31,5 +33,3 @@ _with registration_ - ![#55FF55](https://placehold.co/15x15/55FF55/55FF55.png)
 * */del_tg* - To unlink your telegram profile
 * */SetReg* _"on/off"_ - required/non-required [registration](#registration)
 
-# Telegram-Minecraft-scripts
-To simplify Telegram-Minecraft mod configuration, you can use [scripts written in python](https://github.com/kibersportovich/Telegram-Minecraft-scripts)
