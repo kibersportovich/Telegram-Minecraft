@@ -36,6 +36,16 @@ public class Telegram_bot_pengrad {
                 String text = message.text();
                 long chat = message.chat().id();
                 long user_id = message.from().id();
+                if (text.equals("/get_chat")){
+                    SendMessage request = new SendMessage(chat, String.valueOf(chat));
+                    bot.execute(request, new Callback<SendMessage, SendResponse>() {
+                        @Override
+                        public void onResponse(SendMessage request, SendResponse response) {}
+                        @Override
+                        public void onFailure(SendMessage request, IOException e) {}
+                    });
+                    return UpdatesListener.CONFIRMED_UPDATES_ALL;
+                }
                 if (text.equals("/reg")){
                     String code = " " + Utils.random();
                     String text_mess;
@@ -53,9 +63,7 @@ public class Telegram_bot_pengrad {
                     else {
                         text_mess = "you are already registered";
                     }
-                    SendMessage request = new SendMessage(chat, text_mess)
-                            .parseMode(ParseMode.HTML)
-                            .disableWebPagePreview(true);
+                    SendMessage request = new SendMessage(chat, text_mess);
                     bot.execute(request, new Callback<SendMessage, SendResponse>() {
                         @Override
                         public void onResponse(SendMessage request, SendResponse response) {}
